@@ -1,5 +1,9 @@
 package com.api.sweetshop.model;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +23,19 @@ public class UserProfile {
     private String email;
     private String phoneNumber;
     private String password;
+    @Transient
+    private Gender gender;
+    @Transient
+    private Set<Sweet> favoriteSweets = new HashSet<>();
 
     public UserProfile() {
 
+    }
+
+    public UserProfile(String name, String email, Gender gender) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
     }
 
     public UserProfile(String name, String email, String phoneNumber, String password) {
@@ -34,5 +48,9 @@ public class UserProfile {
     public UserProfile(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public void addFavoriteSweet(Sweet sweet) {
+        favoriteSweets.add(sweet);
     }
 }

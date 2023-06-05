@@ -12,7 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/SweetShop")
@@ -56,10 +58,12 @@ public class UserProfileController {
         // Retrieve the user's id from the cookie
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("userId")) {
-                    return Long.parseLong(cookie.getValue());
-                }
+            Optional<Cookie> userIdCookie = Arrays.stream(cookies)
+                .filter(cookie -> cookie.getName().equals("userId"))
+                .findFirst();
+
+            if (userIdCookie.isPresent()) {
+                return Long.parseLong(userIdCookie.get().getValue());
             }
         }
         return -1;
