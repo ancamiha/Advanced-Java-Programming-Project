@@ -1,0 +1,19 @@
+.navbar .navbar-brand {
+    color: #CF7878;
+    font-family: 'Pacifico', cursive;
+}
+
+.navbar .navbar-brand:hover {
+    color: #CF7878;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.auth_cart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

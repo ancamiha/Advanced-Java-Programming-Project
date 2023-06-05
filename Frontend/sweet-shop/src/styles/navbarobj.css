@@ -1,0 +1,25 @@
+.container_cart{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container_cart{
+    display: flex;
+    align-items: right;
+    justify-content: end;
+
+}
+
+.cart {
+    padding: 4px;
+    width: 45px;
+    font-size: 0.8rem;
+    border: 0px;
+}
+
+.container_hdr h1{
+    position: absolute; left: 1rem; top: 1rem;
+    color: #CF7878;
+    font-family: 'Pacifico', cursive;
+}
