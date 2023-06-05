@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 
+import com.api.sweetshop.exceptions.UserExistsException;
 import com.api.sweetshop.model.Gender;
 import com.api.sweetshop.model.Sweet;
 import com.api.sweetshop.model.UserProfile;
@@ -28,7 +29,7 @@ public class BakingStreamsTest {
   UserProfile user3;
 
   @BeforeEach
-  public void setUp() {
+  public void setUp() throws UserExistsException {
     user1 = new UserProfile("Anna", "anna@yahoo.com", Gender.FEMALE);
     user1.addFavoriteSweet(Sweet.CHOCOLATE_TRUFFLES);
     user1.addFavoriteSweet(Sweet.HOMEMADE_CHOCOLATE);

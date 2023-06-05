@@ -1,11 +1,16 @@
 package com.api.sweetshop.model;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -21,7 +26,8 @@ public class Cart {
     @ElementCollection
     private List<Long> products;
 
-    public Cart() {}
+    public Cart() {
+    }
 
     public Cart(Long userId, List<Long> products) {
         this.userId = userId;
@@ -29,7 +35,7 @@ public class Cart {
     }
 
     public boolean addProductId(Long productId) {
-        if(products.contains(productId))
+        if (products.contains(productId))
             return false;
         products.add(productId);
         return true;

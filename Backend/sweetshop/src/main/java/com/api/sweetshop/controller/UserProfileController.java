@@ -1,5 +1,9 @@
 package com.api.sweetshop.controller;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import com.api.sweetshop.model.UserProfile;
 import com.api.sweetshop.repository.UserProfileRepository;
 import jakarta.servlet.http.Cookie;
@@ -10,11 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/SweetShop")
@@ -34,14 +38,16 @@ public class UserProfileController {
         return "User registered successfully!";
     }
 
-    @GetMapping(value = {"/users"})
+    @GetMapping(value = { "/users" })
     public List<UserProfile> getUsers() {
         return this.userProfileRepository.findAll();
     }
 
-    @PostMapping(value = {"/login"}, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> login(HttpServletResponse response, HttpSession session, @RequestBody UserProfile userProfile) {
-        UserProfile foundUser = userProfileRepository.findByEmailAndPassword(userProfile.getEmail(), userProfile.getPassword());
+    @PostMapping(value = { "/login" }, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> login(HttpServletResponse response, HttpSession session,
+        @RequestBody UserProfile userProfile) {
+        UserProfile foundUser = userProfileRepository.findByEmailAndPassword(userProfile.getEmail(),
+            userProfile.getPassword());
         if (foundUser != null) {
             Cookie userIdCookie = new Cookie("userId", Long.toString(foundUser.getId()));
             userIdCookie.setMaxAge(60 * 60 * 24 * 365);
